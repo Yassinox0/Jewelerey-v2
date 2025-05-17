@@ -13,7 +13,14 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const { product, quantity = 1 } = action.payload;
-      const existingItemIndex = state.items.findIndex(item => item.id === product.id);
+      // Use _id for MongoDB products or fallback to id for compatibility
+      const productId = product._id || product.id;
+      
+      const existingItemIndex = state.items.findIndex(item => {
+        // Check both _id and id for compatibility
+        const itemId = item._id || item.id;
+        return itemId === productId;
+      });
       
       if (existingItemIndex >= 0) {
         // Item already in cart, update quantity
@@ -23,7 +30,8 @@ const cartSlice = createSlice({
       } else {
         // Add new item to cart
         state.items.push({
-          id: product.id,
+          id: productId,
+          _id: product._id, // Store both ID formats for compatibility
           name: product.name,
           price: product.price,
           image: product.image,
@@ -50,7 +58,11 @@ const cartSlice = createSlice({
     
     removeFromCart: (state, action) => {
       const id = action.payload;
-      state.items = state.items.filter(item => item.id !== id);
+      state.items = state.items.filter(item => {
+        // Check both _id and id for compatibility
+        const itemId = item._id || item.id;
+        return itemId !== id;
+      });
       
       // Update cart totals
       state.totalQuantity = state.items.reduce((total, item) => total + item.quantity, 0);
@@ -59,7 +71,11 @@ const cartSlice = createSlice({
     
     updateCartItem: (state, action) => {
       const { id, quantity } = action.payload;
-      const itemIndex = state.items.findIndex(item => item.id === id);
+      const itemIndex = state.items.findIndex(item => {
+        // Check both _id and id for compatibility
+        const itemId = item._id || item.id;
+        return itemId === id;
+      });
       
       if (itemIndex >= 0) {
         state.items[itemIndex].quantity = quantity;

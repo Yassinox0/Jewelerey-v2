@@ -11,7 +11,12 @@ const ProductCard = ({ product }) => {
   const { currentUser } = useAuth();
 
   const handleAddToCart = () => {
-    addToCartWithAuth(product, 1, currentUser, dispatch, navigate);
+    const productWithId = {
+      ...product,
+      id: product._id || product.id
+    };
+    
+    addToCartWithAuth(productWithId, 1, currentUser, dispatch, navigate);
   };
 
   return (

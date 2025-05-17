@@ -9,6 +9,7 @@ import {
 } from '../utils/cartUtils';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import ResetCart from '../components/ResetCart';
 
 const CartPage = () => {
   const { items, totalQuantity, totalAmount } = useSelector((state) => state.cart);
@@ -81,12 +82,15 @@ const CartPage = () => {
           <div className="mb-4" style={{ backgroundColor: 'var(--color-background)', borderRadius: '2px' }}>
             <div className="d-flex justify-content-between align-items-center p-4 border-bottom">
               <h5 className="mb-0 fw-normal">Items in Your Cart ({totalQuantity})</h5>
-              <button 
-                className="btn btn-sm btn-outline-primary"
-                onClick={handleClearCart}
-              >
-                Clear All
-              </button>
+              <div>
+                <button 
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={handleClearCart}
+                >
+                  Clear All
+                </button>
+                <ResetCart />
+              </div>
             </div>
             <div className="p-4">
               {items.map(item => (

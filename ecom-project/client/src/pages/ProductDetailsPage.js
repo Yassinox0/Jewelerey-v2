@@ -46,7 +46,13 @@ const ProductDetailsPage = () => {
   
   const handleAddToCart = () => {
     if (product) {
-      addToCartWithAuth(product, quantity, currentUser, dispatch, navigate);
+      // Ensure product has both _id and id properties for compatibility
+      const productWithId = {
+        ...product,
+        id: product._id || product.id
+      };
+      
+      addToCartWithAuth(productWithId, quantity, currentUser, dispatch, navigate);
     }
   };
   
@@ -220,4 +226,4 @@ const ProductDetailsPage = () => {
   );
 };
 
-export default ProductDetailsPage; 
+export default ProductDetailsPage;

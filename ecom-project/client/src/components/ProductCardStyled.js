@@ -18,7 +18,14 @@ const ProductCardStyled = ({ product, showSale = false }) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault(); // Prevent navigation to product details
-    addToCartWithAuth(product, 1, currentUser, dispatch, navigate);
+    
+    // Ensure product has both _id and id properties for compatibility
+    const productWithId = {
+      ...product,
+      id: product._id || product.id
+    };
+    
+    addToCartWithAuth(productWithId, 1, currentUser, dispatch, navigate);
   };
 
   // Safe access to product properties with defaults

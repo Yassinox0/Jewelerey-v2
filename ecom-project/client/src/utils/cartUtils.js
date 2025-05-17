@@ -48,13 +48,19 @@ export const addToCartWithAuth = async (product, quantity, currentUser, dispatch
     return;
   }
 
+  // Make sure we're using the correct product object format with _id for MongoDB
+  const productWithCorrectId = {
+    ...product,
+    id: product._id || product.id // Ensure we have id field for compatibility
+  };
+
   // Add to cart in Redux state first for immediate UI feedback
-  dispatch(addToCart({ product, quantity }));
+  dispatch(addToCart({ product: productWithCorrectId, quantity }));
   toast.success(`${product.name} added to cart!`);
 
   try {
     // Sync with backend
-    await axios.post(`${API_URL}/api/cart`, { product, quantity });
+    await axios.post(`${API_URL}/api/cart`, { product: productWithCorrectId, quantity });
   } catch (error) {
     console.error('Error syncing cart with server:', error);
     // Don't show error to user since the item appears in the cart from their perspective
@@ -169,6 +175,7 @@ export const syncCartWithServer = async (currentUser, dispatch) => {
         dispatch(addToCart({
           product: {
             id: item.id,
+            _id: item._id, // Include MongoDB _id if available
             name: item.name,
             price: item.price,
             image: item.image
