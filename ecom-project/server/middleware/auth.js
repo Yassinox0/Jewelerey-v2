@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+// Import Firebase Admin from our config
+const { admin } = require('../config/firebase-admin-config');
 
 /**
- * Middleware to authenticate JWT token
+ * Middleware to authenticate Firebase JWT token
  * This protects routes that require authentication
  */
 exports.protect = async (req, res, next) => {
@@ -24,35 +26,20 @@ exports.protect = async (req, res, next) => {
     }
 
     try {
-      // Verify token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-      // Get user from token
-      const user = await User.findByPk(decoded.id, {
-        attributes: { exclude: ['password'] }
-      });
-
-      if (!user) {
-        return res.status(401).json({
-          success: false,
-          error: 'User not found'
-        });
-      }
-
-      if (!user.is_active) {
-        return res.status(401).json({
-          success: false,
-          error: 'Account is deactivated'
-        });
-      }
-
-      // Add user to request object
-      req.user = user;
+      // Verify Firebase token
+      const decodedToken = await admin.auth().verifyIdToken(token);
+      req.user = {
+        uid: decodedToken.uid,
+        email: decodedToken.email,
+        name: decodedToken.name || '',
+        role: decodedToken.role || 'user'
+      };
       next();
     } catch (error) {
+      console.error('Token verification error:', error);
       return res.status(401).json({
         success: false,
-        error: 'Not authorized to access this route'
+        error: 'Invalid token or session expired'
       });
     }
   } catch (error) {

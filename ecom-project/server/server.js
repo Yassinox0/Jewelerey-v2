@@ -7,6 +7,9 @@ const path = require('path');
 const { connectDB } = require('./config/db');
 const productService = require('./services/productService');
 
+// Log payment method
+console.log('Using direct payment processing without third-party providers');
+
 // Load environment variables
 dotenv.config();
 
@@ -42,97 +45,27 @@ app.get('/', (req, res) => {
   res.send('Welcome to the E-Commerce API');
 });
 
-// Initialize Stripe with the API key from environment variables
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const cartRoutes = require('./routes/cartRoutes');
-// const orderRoutes = require('./routes/orderRoutes'); // Commented out as it doesn't exist yet
+const orderRoutes = require('./routes/orderRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const addressRoutes = require('./routes/addressRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // Route mounting
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/cart', cartRoutes);
-// app.use('/api/orders', orderRoutes); // Commented out as it doesn't exist yet
+app.use('/api/orders', orderRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/api/notifications', notificationRoutes);
-
-// Stripe payment endpoint
-app.post('/api/create-checkout-session', async (req, res) => {
-  try {
-    console.log('Received checkout request:', req.body);
-    const { items, customerEmail } = req.body;
-    
-    if (!items || items.length === 0) {
-      return res.status(400).json({ error: 'No items in cart' });
-    }
-    
-    // Create line items for Stripe
-    const lineItems = items.map(item => ({
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.name,
-          images: [item.image || 'https://via.placeholder.com/100'],
-          description: item.description || '',
-        },
-        unit_amount: Math.round(item.price * 100), // Stripe requires cents
-      },
-      quantity: item.quantity,
-    }));
-
-    console.log('Creating Stripe session with line items:', lineItems);
-
-    // Create Stripe session
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: lineItems,
-      mode: 'payment',
-      customer_email: customerEmail,
-      success_url: `${process.env.CLIENT_URL || 'http://localhost:3000'}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.CLIENT_URL || 'http://localhost:3000'}/cart`,
-      shipping_address_collection: {
-        allowed_countries: ['US', 'CA', 'GB', 'FR', 'DE'],
-      },
-      shipping_options: [
-        {
-          shipping_rate_data: {
-            type: 'fixed_amount',
-            fixed_amount: {
-              amount: 0,
-              currency: 'usd',
-            },
-            display_name: 'Free shipping',
-            delivery_estimate: {
-              minimum: {
-                unit: 'business_day',
-                value: 5,
-              },
-              maximum: {
-                unit: 'business_day',
-                value: 7,
-              },
-            },
-          },
-        },
-      ],
-    });
-
-    console.log('Stripe session created:', session.id);
-    res.status(200).json({ id: session.id, url: session.url });
-  } catch (error) {
-    console.error('Stripe error:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
+app.use('/api/users', userRoutes);
 
 // Add test routes for debugging
 app.get('/test-routes', (req, res) => {

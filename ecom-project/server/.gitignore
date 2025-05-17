@@ -1,7 +1,7 @@
 # dependencies
 /node_modules
 package-lock.json
-
+/firebase-service-account.json
 # environment variables
 .env
 .env.local
