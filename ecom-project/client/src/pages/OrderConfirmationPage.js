@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
 import { FiCheckCircle, FiTruck, FiDownload } from 'react-icons/fi';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 
 const OrderConfirmationPage = () => {
   const { orderId } = useParams();
@@ -91,8 +91,8 @@ const OrderConfirmationPage = () => {
       tableRows.push(tableRow);
     });
     
-    // Generate the table
-    doc.autoTable({
+    // Generate the table using autoTable directly
+    autoTable(doc, {
       head: [tableColumn],
       body: tableRows,
       startY: address.addressLine2 ? 130 : 125,
@@ -101,7 +101,7 @@ const OrderConfirmationPage = () => {
     });
     
     // Add totals
-    const finalY = doc.previousAutoTable.finalY + 10;
+    const finalY = doc.lastAutoTable.finalY + 10;
     
     doc.text(`Subtotal: $${order.total.toFixed(2)}`, 150, finalY, { align: 'right' });
     doc.text(`Shipping: Free`, 150, finalY + 7, { align: 'right' });
