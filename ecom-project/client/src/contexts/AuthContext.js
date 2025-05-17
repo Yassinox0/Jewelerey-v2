@@ -24,9 +24,9 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          // Get user data from MySQL database
+          // Get user data from MongoDB database
           const token = await user.getIdToken();
-          const response = await axios.get('/api/auth/me', {
+          const response = await axios.get('http://localhost:7777/api/auth/me', {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -51,40 +51,61 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
+      // Use Firebase authentication instead of direct API
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      return { success: true, user: userCredential.user };
+      const user = userCredential.user;
+      return { success: true, user };
     } catch (error) {
+      console.error('Login error:', error);
       return { 
         success: false, 
-        error: error.message
+        error: error.message || 'Login failed'
       };
     }
   };
 
   const register = async (userData) => {
     try {
-      // Create user in Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
+      // Create user with Firebase
+      const userCredential = await createUserWithEmailAndPassword(
+        auth, 
+        userData.email, 
+        userData.password
+      );
       
-      // Update profile with display name
-      await updateProfile(userCredential.user, {
+      const user = userCredential.user;
+      
+      // Update profile with name
+      await updateProfile(user, {
         displayName: userData.name
       });
-
-      // Create user in MySQL database
-      const response = await axios.post('/api/auth/register', {
-        ...userData,
-        firebaseUid: userCredential.user.uid
-      });
-
-      if (response.data.success) {
-        return { success: true, user: userCredential.user };
+      
+      // Optional: Save additional user data to MongoDB
+      try {
+        const token = await user.getIdToken();
+        await axios.post(
+          'http://localhost:7777/api/users/create-profile',
+          {
+            name: userData.name,
+            email: userData.email
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+      } catch (profileError) {
+        console.error('Error creating user profile:', profileError);
+        // Continue even if profile creation fails
       }
-      return { success: false, error: response.data.message };
+      
+      return { success: true, user };
     } catch (error) {
+      console.error('Registration error:', error);
       return { 
         success: false, 
-        error: error.message
+        error: error.message || 'Registration failed' 
       };
     }
   };

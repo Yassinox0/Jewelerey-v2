@@ -26,9 +26,20 @@ const RegisterPage = () => {
       setError('');
       setLoading(true);
       
-      await register(name, email, password);
-      toast.success('Account created successfully!');
-      navigate('/');
+      const userData = {
+        name,
+        email,
+        password
+      };
+      
+      const result = await register(userData);
+      
+      if (result.success) {
+        toast.success('Account created successfully!');
+        navigate('/');
+      } else {
+        setError(result.error || 'Failed to create account');
+      }
     } catch (error) {
       console.error('Registration error:', error);
       
