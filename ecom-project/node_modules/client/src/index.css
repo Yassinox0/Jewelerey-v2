@@ -1,0 +1,1089 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Didot:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600&family=Baskerville:wght@400;700&display=swap');
+
+:root {
+  /* Primary Colors */
+  --color-navy: #1A2E44;
+  --color-cream: #F7F3E8;
+  --color-gold: #D4B96E;
+  
+  /* Secondary Colors */
+  --color-sage: #8A9B8E;
+  --color-taupe: #A69B8D;
+  --color-burgundy: #6D2E46;
+  
+  /* Neutral Colors */
+  --color-off-white: #F9F6F0;
+  --color-light-grey: #E8E8E6;
+  --color-charcoal: #303438;
+  --color-medium-grey: #707070;
+  
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-accent: 'Didot', serif;
+  
+  /* Background Color - Using a single color */
+  --color-background: #F9F6F0;
+  
+  /* Card Style Variations */
+  --color-blush: #F2D9D9;
+  --color-sage-light: #D8E2DC;
+  --color-gold-light: #F8E9D2;
+  --color-neon-blue: #4361EE;
+  --color-neon-pink: #F72585;
+  --color-neon-purple: #7209B7;
+  --color-vintage-cream: #F5F1E6;
+  --color-vintage-gold: #C6A96C;
+  --color-vintage-brown: #8C7361;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-navy);
+  font-weight: 500;
+}
+
+.accent-text {
+  font-family: var(--font-accent);
+}
+
+/* Category Card Styles */
+.category-card {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 1px solid var(--color-light-grey);
+  background-color: var(--color-background);
+  box-shadow: 0 4px 12px rgba(26, 46, 68, 0.08);
+  overflow: hidden;
+  border-radius: 2px;
+  position: relative;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(26, 46, 68, 0.12);
+  border-color: var(--color-gold);
+}
+
+.category-card .card-img-top {
+  transition: all 0.5s ease-in-out;
+}
+
+.category-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.category-card .card-title {
+  font-family: var(--font-heading);
+  color: var(--color-navy);
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+/* Product Card Styles */
+.product-card {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--color-light-grey);
+  background-color: var(--color-background);
+  box-shadow: 0 4px 12px rgba(26, 46, 68, 0.08);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(26, 46, 68, 0.12);
+  border-color: var(--color-gold);
+}
+
+.product-card .product-image {
+  height: 300px;
+  object-fit: cover;
+  border-radius: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.03);
+}
+
+.product-card .card-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  margin-bottom: 0.5rem;
+}
+
+.product-card .card-text {
+  color: var(--color-medium-grey);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
+.product-card .price {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-burgundy);
+}
+
+.product-card .btn-primary {
+  background-color: var(--color-navy);
+  border: 1px solid var(--color-navy);
+  color: var(--color-background);
+  padding: 0.6rem 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.product-card .btn-primary:hover {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}
+
+/* Header Styles */
+.navbar {
+  background-color: var(--color-background);
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--color-light-grey);
+  box-shadow: 0 2px 10px rgba(26, 46, 68, 0.05);
+}
+
+.navbar-brand {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--color-navy) !important;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-navy) !important;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+  padding: 0.5rem 1rem !important;
+  position: relative;
+}
+
+.nav-link:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background-color: var(--color-gold);
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: var(--color-gold) !important;
+}
+
+.nav-link:hover:after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--color-gold) !important;
+}
+
+.nav-link.active:after {
+  width: 100%;
+}
+
+.cart-icon {
+  position: relative;
+  color: var(--color-navy);
+  transition: color 0.3s ease-in-out;
+}
+
+.cart-icon:hover {
+  color: var(--color-gold);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--color-burgundy);
+  color: var(--color-cream);
+  border-radius: 50%;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+
+/* Auth Buttons in Navbar */
+.navbar .btn-outline-primary {
+  border: 1px solid var(--color-navy);
+  color: var(--color-navy);
+  background-color: transparent;
+  padding: 0.5rem 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.navbar .btn-outline-primary:hover {
+  background-color: var(--color-navy);
+  color: var(--color-background);
+  transform: translateY(-2px);
+}
+
+.navbar .btn-primary {
+  background-color: var(--color-navy);
+  border: 1px solid var(--color-navy);
+  color: var(--color-background);
+  padding: 0.5rem 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.navbar .btn-primary:hover {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}
+
+/* Carousel Styles */
+.carousel-item {
+  position: relative;
+}
+
+.carousel-item img {
+  filter: brightness(0.9);
+}
+
+.carousel-caption {
+  background: rgba(26, 46, 68, 0.7);
+  padding: 2.5rem;
+  border-radius: 2px;
+  max-width: 600px;
+  margin: 0 auto;
+  bottom: 20%;
+  backdrop-filter: blur(5px);
+}
+
+.carousel-caption h2 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--color-cream);
+  margin-bottom: 1rem;
+}
+
+.carousel-caption p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: var(--color-cream);
+  margin-bottom: 1.5rem;
+}
+
+.carousel-caption .btn {
+  background-color: var(--color-gold);
+  border: none;
+  color: var(--color-navy);
+  padding: 0.8rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.carousel-caption .btn:hover {
+  background-color: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+/* Section Styles */
+section {
+  padding: 5rem 0;
+  background-color: var(--color-background);
+  position: relative;
+}
+
+section:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-light-grey), transparent);
+}
+
+section h2 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  margin-bottom: 2.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+section h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background-color: var(--color-gold);
+}
+
+/* Form Styles */
+.form-control {
+  border: 1px solid var(--color-light-grey);
+  border-radius: 2px;
+  padding: 0.8rem 1rem;
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-charcoal);
+  background-color: var(--color-background);
+  transition: all 0.3s ease-in-out;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 0.2rem rgba(212, 185, 110, 0.15);
+  background-color: var(--color-background);
+}
+
+.form-select {
+  border: 1px solid var(--color-light-grey);
+  border-radius: 2px;
+  padding: 0.8rem 1rem;
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-charcoal);
+  background-color: var(--color-background);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .carousel-caption {
+    padding: 1.5rem;
+    bottom: 10%;
+  }
+
+  .carousel-caption h2 {
+    font-size: 1.8rem;
+  }
+
+  .carousel-caption p {
+    font-size: 1rem;
+  }
+
+  section {
+    padding: 2.5rem 0;
+  }
+
+  section h2 {
+    font-size: 1.8rem;
+  }
+
+  .product-card .product-image {
+    height: 250px;
+  }
+}
+
+/* Cart Styles */
+.cart-item {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cart-item:hover {
+  background-color: #f8f9fa;
+}
+
+.cart-item .quantity-control {
+  width: 100px;
+}
+
+/* Auth Form Styles */
+.auth-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form .form-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.auth-form .btn-submit {
+  width: 100%;
+  padding: 0.75rem;
+  font-weight: 600;
+}
+
+.auth-form .auth-links {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Toast Styles */
+.Toastify__toast {
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.Toastify__toast--success {
+  background-color: #28a745;
+}
+
+.Toastify__toast--error {
+  background-color: #dc3545;
+}
+
+.Toastify__toast--info {
+  background-color: #17a2b8;
+}
+
+.Toastify__toast-body {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .product-card .product-image {
+    height: 200px;
+  }
+
+  .product-card .card-title {
+    font-size: 1rem;
+  }
+
+  .product-card .price {
+    font-size: 1.1rem;
+  }
+
+  .product-card .btn-primary {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .auth-form {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
+
+/* Additional Utility Classes */
+.letter-spacing-1 {
+  letter-spacing: 1px;
+}
+
+.letter-spacing-2 {
+  letter-spacing: 2px;
+}
+
+.fw-light {
+  font-weight: 300 !important;
+}
+
+.bg-off-white {
+  background-color: var(--color-background) !important;
+}
+
+.bg-cream {
+  background-color: var(--color-background) !important;
+}
+
+.bg-navy {
+  background-color: var(--color-navy) !important;
+  color: var(--color-cream) !important;
+}
+
+.bg-gold {
+  background-color: var(--color-gold) !important;
+  color: var(--color-navy) !important;
+}
+
+.bg-burgundy {
+  background-color: var(--color-burgundy) !important;
+  color: var(--color-cream) !important;
+}
+
+.bg-sage {
+  background-color: var(--color-sage) !important;
+  color: var(--color-cream) !important;
+}
+
+.text-gold {
+  color: var(--color-gold) !important;
+}
+
+.text-navy {
+  color: var(--color-navy) !important;
+}
+
+.text-burgundy {
+  color: var(--color-burgundy) !important;
+}
+
+.text-sage {
+  color: var(--color-sage) !important;
+}
+
+/* Fix for Bootstrap Navbar Toggler */
+.navbar-toggler {
+  border-color: var(--color-light-grey);
+  color: var(--color-navy);
+  padding: 0.5rem;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(26, 46, 68, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(26, 46, 68, 0.1);
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+  border: 1px solid var(--color-light-grey);
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(26, 46, 68, 0.1);
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  background-color: var(--color-background);
+}
+
+.dropdown-item {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-navy);
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.dropdown-item:hover {
+  background-color: var(--color-light-grey);
+  color: var(--color-navy);
+}
+
+.dropdown-divider {
+  border-top: 1px solid var(--color-light-grey);
+  margin: 0.5rem 0;
+}
+
+/* Badge Styles */
+.badge {
+  font-family: var(--font-body);
+  font-weight: 400;
+  padding: 0.35rem 0.65rem;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Button Improvements */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 400;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Fix for Mobile Navbar */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: var(--color-background);
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 2px;
+    border: 1px solid var(--color-light-grey);
+  }
+  
+  .navbar .nav-link {
+    padding: 0.75rem 0 !important;
+  }
+  
+  .navbar .nav-link:after {
+    display: none;
+  }
+  
+  .navbar .btn {
+    margin: 0.5rem 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Page Container */
+.page-container {
+  background-color: var(--color-background);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  background-color: var(--color-background);
+  padding-bottom: 3rem;
+}
+
+/* Product Card Style Variations */
+
+/* 1. Modern Luxury Card */
+.product-card-luxury {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-background);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  border: none;
+  position: relative;
+  height: 100%;
+}
+
+.product-card-luxury:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.product-card-luxury .card-img-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #f8f8f8;
+}
+
+.product-card-luxury .card-img-top {
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.product-card-luxury:hover .card-img-top {
+  transform: scale(1.08);
+}
+
+.product-card-luxury .sale-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: var(--color-burgundy);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+
+.product-card-luxury .card-body {
+  padding: 1.5rem;
+}
+
+.product-card-luxury .product-category {
+  font-size: 0.8rem;
+  color: var(--color-taupe);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.product-card-luxury .product-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: var(--color-navy);
+  line-height: 1.4;
+}
+
+.product-card-luxury .product-price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-burgundy);
+  margin-bottom: 1.25rem;
+}
+
+.product-card-luxury .btn-add-to-cart {
+  background-color: var(--color-navy);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.product-card-luxury .btn-add-to-cart:hover {
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}
+
+/* 2. Neon Glow Card */
+.product-card-neon {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #121212;
+  box-shadow: 0 0 20px rgba(67, 97, 238, 0.3);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(67, 97, 238, 0.2);
+  position: relative;
+  height: 100%;
+}
+
+.product-card-neon:hover {
+  box-shadow: 0 0 30px rgba(67, 97, 238, 0.5);
+  transform: translateY(-5px);
+}
+
+.product-card-neon .card-img-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #0a0a0a;
+}
+
+.product-card-neon .card-img-top {
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.product-card-neon:hover .card-img-top {
+  transform: scale(1.05);
+  filter: brightness(1) contrast(1.1);
+}
+
+.product-card-neon .sale-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(45deg, var(--color-neon-pink), var(--color-neon-purple));
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(247, 37, 133, 0.5);
+}
+
+.product-card-neon .card-body {
+  padding: 1.5rem;
+}
+
+.product-card-neon .product-category {
+  font-size: 0.8rem;
+  color: var(--color-neon-blue);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  text-shadow: 0 0 5px rgba(67, 97, 238, 0.5);
+}
+
+.product-card-neon .product-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: white;
+  line-height: 1.4;
+}
+
+.product-card-neon .product-price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-neon-pink);
+  margin-bottom: 1.25rem;
+  text-shadow: 0 0 5px rgba(247, 37, 133, 0.5);
+}
+
+.product-card-neon .btn-add-to-cart {
+  background: linear-gradient(45deg, var(--color-neon-blue), var(--color-neon-purple));
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(67, 97, 238, 0.5);
+}
+
+.product-card-neon .btn-add-to-cart:hover {
+  background: linear-gradient(45deg, var(--color-neon-purple), var(--color-neon-pink));
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(67, 97, 238, 0.7);
+}
+
+/* 3. Glass Morphism Card */
+.product-card-glass {
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  height: 100%;
+}
+
+.product-card-glass:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.product-card-glass .card-img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card-glass .card-img-top {
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.product-card-glass:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.product-card-glass .sale-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgba(109, 46, 70, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.product-card-glass .card-body {
+  padding: 1.5rem;
+}
+
+.product-card-glass .product-category {
+  font-size: 0.8rem;
+  color: rgba(48, 52, 56, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.product-card-glass .product-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: var(--color-navy);
+  line-height: 1.4;
+}
+
+.product-card-glass .product-price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-burgundy);
+  margin-bottom: 1.25rem;
+}
+
+.product-card-glass .btn-add-to-cart {
+  background-color: rgba(26, 46, 68, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.product-card-glass .btn-add-to-cart:hover {
+  background-color: rgba(212, 185, 110, 0.7);
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}
+
+/* 4. Vintage Luxury Card */
+.product-card-vintage {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--color-vintage-cream);
+  box-shadow: 0 8px 20px rgba(140, 115, 97, 0.15);
+  transition: all 0.4s ease;
+  border: 1px solid var(--color-vintage-gold);
+  position: relative;
+  height: 100%;
+}
+
+.product-card-vintage:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(140, 115, 97, 0.25);
+}
+
+.product-card-vintage .card-img-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #f5f1e6;
+}
+
+.product-card-vintage .card-img-top {
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: sepia(20%);
+}
+
+.product-card-vintage:hover .card-img-top {
+  transform: scale(1.05);
+  filter: sepia(10%);
+}
+
+.product-card-vintage .sale-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: var(--color-vintage-brown);
+  color: var(--color-vintage-cream);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  border: 1px solid var(--color-vintage-gold);
+}
+
+.product-card-vintage .card-body {
+  padding: 1.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23c6a96c' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.product-card-vintage .product-category {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  color: var(--color-vintage-brown);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.product-card-vintage .product-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--color-vintage-brown);
+  line-height: 1.4;
+}
+
+.product-card-vintage .product-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-vintage-brown);
+  margin-bottom: 1.25rem;
+}
+
+.product-card-vintage .btn-add-to-cart {
+  background-color: var(--color-vintage-brown);
+  color: var(--color-vintage-cream);
+  border: 1px solid var(--color-vintage-gold);
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.product-card-vintage .btn-add-to-cart:hover {
+  background-color: var(--color-vintage-gold);
+  color: var(--color-vintage-brown);
+  transform: translateY(-2px);
+}

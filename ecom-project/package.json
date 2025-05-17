@@ -1,0 +1,27 @@
+{
+  "name": "goyna-jewelry",
+  "version": "1.0.0",
+  "description": "Goyna Jewelry E-Commerce Platform",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "start:server": "cd server && npm run dev",
+    "start:client": "cd client && npm start",
+    "start": "echo \"Please use 'start.bat' or 'start.ps1' to start both server and client\" && exit 1",
+    "fix:client": "cd client && npm run fix-sourcemaps",
+    "fix:firebase": "cd server && node fix-private-key.js",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "keywords": [
+    "ecommerce",
+    "react",
+    "mongodb",
+    "firebase",
+    "node"
+  ],
+  "author": "",
+  "license": "ISC"
+} 
