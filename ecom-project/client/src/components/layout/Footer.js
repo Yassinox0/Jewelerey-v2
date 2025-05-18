@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Col } from 'react-bootstrap';
 
 const Footer = () => {
   return (
@@ -7,7 +8,7 @@ const Footer = () => {
       <div className="container">
         <div className="row g-4">
           <div className="col-lg-3 col-md-6">
-            <h3 className="h5 mb-3">Goyna</h3>
+            <h3 className="h5 mb-3">Elegance Jewels</h3>
             <p className="text-muted">Discover a world of beautiful hand crafted jewelry designs, created to celebrate life's most precious moments.</p>
             <div className="mt-4">
               <Link to="#" className="me-2 text-decoration-none">
@@ -68,7 +69,7 @@ const Footer = () => {
         <hr className="my-4" />
         <div className="row">
           <div className="col text-center">
-            <p className="mb-0 text-muted">&copy; {new Date().getFullYear()} Goyna Jewelry. All rights reserved.</p>
+            <p className="mb-0 text-muted">&copy; {new Date().getFullYear()} Elegance Jewels. All rights reserved.</p>
           </div>
         </div>
       </div>

@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+// Import custom theme styles (must be after Bootstrap for proper overrides)
+import './styles/custom.css';
 
 // Redux Store
 import store from './redux/store';

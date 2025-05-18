@@ -37,11 +37,9 @@ const Header = () => {
             <i className="bi bi-search"></i>
           </div>
           
-          <Link className="navbar-brand" to="/">
-            <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: '700', fontSize: '2.5rem', margin: '0' }}>
-              Goyna
-            </h1>
-          </Link>
+          <Navbar.Brand as={Link} to="/" className="elegant-brand">
+            Elegance Jewels
+          </Navbar.Brand>
           
           <div className="icon-wrapper d-flex align-items-center">
             {!isAdminPage && (
