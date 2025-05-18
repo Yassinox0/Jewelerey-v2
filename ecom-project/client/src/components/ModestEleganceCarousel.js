@@ -2,37 +2,42 @@ import React from 'react';
 import { Carousel, Container, Row } from 'react-bootstrap';
 
 const ModestEleganceCarousel = () => {
-  // Array of carousel items with images only
+  // Array of carousel items with images and elegant captions
   const carouselItems = [
     {
       id: 1,
       image: '/assets/carousel-1.jpg',
       smallImage: '/assets/carousel-1-small.jpg',
-      alt: 'Pearl Elegance'
+      alt: 'Pearl Elegance',
+      caption: 'Pearl Elegance'
     },
     {
       id: 2,
       image: '/assets/carousel-2.jpg',
       smallImage: '/assets/carousel-2-small.jpg',
-      alt: 'Gold Perfection'
+      alt: 'Gold Perfection',
+      caption: 'Gold Perfection'
     },
     {
       id: 3,
       image: '/assets/carousel-3.jpg',
       smallImage: '/assets/carousel-3-small.jpg',
-      alt: 'Statement Pieces'
+      alt: 'Statement Pieces',
+      caption: 'Statement Pieces'
     },
     {
       id: 4,
       image: '/assets/carousel-4.jpg',
       smallImage: '/assets/carousel-4-small.jpg',
-      alt: 'Everyday Luxury'
+      alt: 'Everyday Luxury',
+      caption: 'Everyday Luxury'
     },
     {
       id: 5,
       image: '/assets/carousel-5.jpg',
       smallImage: '/assets/carousel-5-small.jpg',
-      alt: 'Refined Collection'
+      alt: 'Refined Collection',
+      caption: 'Refined Collection'
     }
   ];
 
@@ -65,6 +70,9 @@ const ModestEleganceCarousel = () => {
                           alt={item.alt}
                         />
                       </picture>
+                      <div className="image-caption">
+                        <span>{item.caption}</span>
+                      </div>
                     </div>
                   </div>
                 </Row>

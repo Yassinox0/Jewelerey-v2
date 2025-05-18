@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 // Import custom theme styles (must be after Bootstrap for proper overrides)
 import './styles/custom.css';
+import './styles/Footer.css'; // Import footer styles
 
 // Redux Store
 import store from './redux/store';
@@ -49,9 +50,9 @@ function App() {
     <Provider store={store}>
       <AuthProvider>
         <Router>
-          <div className="App">
+          <div className="App page-container">
             <Header />
-            <main className="main-content">
+            <main className="content-wrap">
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/products" element={<ProductsPage />} />
