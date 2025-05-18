@@ -20,6 +20,7 @@ import { AuthProvider } from './contexts/AuthContext';
 // Components
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
+import AdminAccess from './pages/AdminAccess'; // We'll create this file
 
 // Layout Components
 import Header from './components/layout/Header';
@@ -66,6 +67,7 @@ function App() {
                 <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
                 <Route path="/admin" element={<AdminRoute><AdminDashboardPage /></AdminRoute>} />
                 <Route path="/admin/refresh" element={<AdminRoute><RefreshAdminPage /></AdminRoute>} />
+                <Route path="/admin-access" element={<AdminAccess />} />
                 <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
                 <Route path="/order-confirmation/:orderId" element={<ProtectedRoute><OrderConfirmationPage /></ProtectedRoute>} />
                 <Route path="/order/:orderId" element={<ProtectedRoute><OrderConfirmationPage /></ProtectedRoute>} />

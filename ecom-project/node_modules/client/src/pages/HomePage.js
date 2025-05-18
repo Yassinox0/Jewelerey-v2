@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Spinner, Alert, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Spinner, Alert, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ProductCardStyled from '../components/ProductCardStyled';
 import CategoryDisplay from '../components/CategoryDisplay';
 import { getAllProducts, getAllCategories } from '../services/productService';
 import ModestEleganceCarousel from '../components/ModestEleganceCarousel';
+import { useAuth } from '../contexts/AuthContext';
 import '../styles/HomePage.css';
 import '../styles/ModestEleganceCarousel.css';
 
@@ -17,6 +18,7 @@ const HomePage = () => {
   const [sortBy, setSortBy] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { currentUser, isAdmin } = useAuth();
 
   // Fetch products and categories on component mount
   useEffect(() => {
@@ -96,8 +98,31 @@ const HomePage = () => {
     setFilteredProducts(result);
   }, [products, selectedCategory, searchQuery, sortBy]);
 
+  // Check if user is admin
+  const userIsAdmin = isAdmin();
+
   return (
     <div className="home-page">
+      {/* Admin Panel Alert - Only shown to admin users */}
+      {userIsAdmin && (
+        <Container className="mt-3">
+          <Card className="border-0 shadow-sm" bg="light">
+            <Card.Body className="d-flex justify-content-between align-items-center">
+              <div>
+                <h5 className="mb-0">Welcome, {currentUser?.name || "Admin"}!</h5>
+                <p className="text-muted mb-0">You have administrator access.</p>
+              </div>
+              <Link to="/admin">
+                <Button variant="danger">
+                  <i className="bi bi-speedometer2 me-2"></i>
+                  Go to Admin Dashboard
+                </Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Container>
+      )}
+
       <Container fluid className="px-0">
         {/* Hero Section with title overlay on video */}
         <section className="hero-section-container">

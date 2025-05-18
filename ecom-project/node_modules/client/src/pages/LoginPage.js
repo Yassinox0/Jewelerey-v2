@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   
-  const { login } = useAuth();
+  const { login, isAdmin, currentUser, refreshClaims } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,11 +24,33 @@ const LoginPage = () => {
       setError('');
       setLoading(true);
       
-      await login(email, password);
-      toast.success('Login successful!');
+      const result = await login(email, password);
       
-      // Redirect back to the page they were trying to access or home
-      navigate(from, { replace: true });
+      if (result.success) {
+        toast.success('Login successful!');
+        console.log('Login successful. User:', result.user);
+        
+        // Force a claims refresh to ensure admin status is up-to-date
+        await refreshClaims();
+        
+        // Check if user is admin and redirect to admin dashboard with a longer delay
+        setTimeout(() => {
+          console.log("Current user after login:", currentUser);
+          console.log("Admin status check:", isAdmin());
+          console.log("User role:", currentUser?.role);
+          
+          if (isAdmin()) {
+            console.log("Redirecting to admin dashboard...");
+            navigate('/admin');
+          } else {
+            console.log("Redirecting to:", from);
+            // Redirect back to the page they were trying to access or home
+            navigate(from, { replace: true });
+          }
+        }, 1000); // Longer timeout to ensure auth state is updated
+      } else {
+        setError(result.error || 'Failed to sign in');
+      }
     } catch (error) {
       console.error('Login error:', error);
       
