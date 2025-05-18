@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Navbar, Nav, Container, Dropdown, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, Dropdown, NavDropdown, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAuth } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 
 const Header = () => {
   const { totalQuantity } = useSelector(state => state.cart);
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -24,8 +24,8 @@ const Header = () => {
     }
   };
   
-  // Check if user is admin
-  const isAdmin = currentUser && currentUser.role === 'admin';
+  // Check if user is admin using the context function
+  const userIsAdmin = isAdmin();
   
   return (
     <header>
@@ -57,6 +57,15 @@ const Header = () => {
                 </Link>
               </>
             )}
+            
+            {userIsAdmin && !isAdminPage && (
+              <Link to="/admin" className="me-3">
+                <Button variant="outline-danger" size="sm">
+                  <i className="bi bi-speedometer2 me-1"></i> Admin Panel
+                </Button>
+              </Link>
+            )}
+            
             {currentUser ? (
               <Dropdown align="end">
                 <Dropdown.Toggle as="div" className="d-flex align-items-center" style={{ cursor: 'pointer' }}>
@@ -66,6 +75,7 @@ const Header = () => {
                   <Dropdown.ItemText>
                     <strong>{currentUser.name}</strong>
                     <div className="small text-muted">{currentUser.email}</div>
+                    {userIsAdmin && <div className="badge bg-danger mt-1">Admin User</div>}
                   </Dropdown.ItemText>
                   <Dropdown.Divider />
                   <Dropdown.Item as={Link} to="/profile">
@@ -74,7 +84,7 @@ const Header = () => {
                   <Dropdown.Item as={Link} to="/orders">
                     <i className="bi bi-box me-2"></i>My Orders
                   </Dropdown.Item>
-                  {isAdmin && (
+                  {userIsAdmin && (
                     <>
                       <Dropdown.Divider />
                       <Dropdown.Item as={Link} to="/admin">
@@ -109,7 +119,7 @@ const Header = () => {
                 // Admin navigation - only Home link
                 <>
                   <Nav.Link as={Link} to="/" className="mx-2">Home</Nav.Link>
-                  {isAdmin && (
+                  {userIsAdmin && (
                     <Nav.Link as={Link} to="/admin" className="mx-2 text-danger">
                       <i className="bi bi-gear-fill me-1"></i>Admin
                     </Nav.Link>
@@ -141,7 +151,7 @@ const Header = () => {
                     </NavDropdown.Item>
                   </NavDropdown>
                   
-                  {isAdmin && (
+                  {userIsAdmin && (
                     <Nav.Link as={Link} to="/admin" className="mx-2 text-danger">
                       <i className="bi bi-gear-fill me-1"></i>Admin
                     </Nav.Link>
