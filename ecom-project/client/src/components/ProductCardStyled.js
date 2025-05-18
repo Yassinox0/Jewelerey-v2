@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { addToCartWithAuth } from '../utils/cartUtils';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, FaHeart } from 'react-icons/fa';
 
 /**
  * ProductCardStyled - A component for displaying product cards
@@ -18,6 +18,7 @@ const ProductCardStyled = ({ product, showSale = false }) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault(); // Prevent navigation to product details
+    e.stopPropagation(); // Stop event from bubbling up
     
     // Ensure product has both _id and id properties for compatibility
     const productWithId = {
@@ -41,7 +42,7 @@ const ProductCardStyled = ({ product, showSale = false }) => {
 
   return (
     <Link to={`/products/${product._id}`} className="text-decoration-none">
-      <div className="product-card product-card-luxury shine-wrapper">
+      <div className="product-card elegant-product-card shine-wrapper">
         <div className="card-img-container">
           <img 
             src={formattedImage} 
@@ -52,6 +53,20 @@ const ProductCardStyled = ({ product, showSale = false }) => {
               e.target.src = 'https://via.placeholder.com/300x300?text=No+Image';
             }}
           />
+          <div className="card-overlay"></div>
+          <div className="card-quick-actions">
+            <button className="quick-action-btn" title="Add to Wishlist" onClick={(e) => e.preventDefault()}>
+              <FaHeart />
+            </button>
+            <button
+              className="quick-action-btn add-cart-btn"
+              onClick={handleAddToCart}
+              disabled={productStock === 0}
+              title={productStock === 0 ? 'Out of Stock' : 'Add to Cart'}
+            >
+              <span>+</span>
+            </button>
+          </div>
           <div className="shine"></div>
           {showSale && (
             <div className="sale-badge">
@@ -59,41 +74,36 @@ const ProductCardStyled = ({ product, showSale = false }) => {
             </div>
           )}
         </div>
-        <div className="card-body p-3">
-          <div className="product-category small text-uppercase mb-1" style={{ opacity: 0.7 }}>
+        <div className="card-body">
+          <div className="product-category">
             {productCategory}
           </div>
           
-          <h3 className="card-title mb-2">{productName}</h3>
+          <h3 className="product-title">{productName}</h3>
           
-          <div className="d-flex mb-2">
+          <div className="product-rating">
             {[...Array(5)].map((_, index) => (
               <FaStar
                 key={index}
-                style={{ 
-                  color: index < Math.floor(productRating) 
-                    ? 'var(--color-primary)' 
-                    : '#e0e0e0',
-                  marginRight: '2px',
-                  fontSize: '0.8rem'
-                }}
+                className={index < Math.floor(productRating) ? 'star active' : 'star'}
               />
             ))}
-            <span className="ms-1" style={{ opacity: 0.7, fontSize: '0.8rem' }}>
+            <span className="rating-count">
               ({productRating})
             </span>
           </div>
 
-          <p className="card-price mb-3">
-            ${productPrice.toFixed(2)}
-          </p>
+          <div className="price-container">
+            <p className="product-price">
+              ${productPrice.toFixed(2)}
+            </p>
+          </div>
 
           <button 
-            className="btn btn-primary w-100"
-            onClick={handleAddToCart}
+            className="btn-add-to-cart"
             disabled={productStock === 0}
           >
-            {productStock === 0 ? 'Out of Stock' : 'Add to Cart'}
+            {productStock === 0 ? 'Out of Stock' : 'View Details'}
           </button>
         </div>
       </div>

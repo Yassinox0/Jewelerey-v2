@@ -98,45 +98,47 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <Container className="px-lg-3 px-sm-2">
-        {/* Hero Section with Video Background - Compact with rounded corners */}
-        <section className="fullscreen-video-hero">
-          <video autoPlay muted loop className="fullscreen-video">
-            <source src="/videos/vid1.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="hero-content-wrapper">
-            <div className="hero-text">
-              <h1 className="elegant-title">Elegance Jewels</h1>
-              <p className="elegant-subtitle">
-                Discover our exquisite collection of handcrafted jewelry, designed to make every moment unforgettable
-              </p>
-              <Button variant="outline-light" size="lg" className="hero-button mt-4">
-                Explore Collection
-              </Button>
+      <Container fluid className="px-0">
+        {/* Hero Section with title overlay on video */}
+        <section className="hero-section-container">
+          <div className="video-card">
+            <video autoPlay muted loop className="fullscreen-video">
+              <source src="/videos/vid1.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="video-overlay">
+              <div className="hero-title-content text-center">
+                <h1 className="elegant-title">Elegance Jewels</h1>
+                <p className="elegant-subtitle">
+                  Discover our exquisite collection of handcrafted jewelry, designed to make every moment unforgettable
+                </p>
+                <Button variant="outline-light" size="lg" className="hero-button">
+                  Explore Collection
+                </Button>
+              </div>
             </div>
           </div>
         </section>
       </Container>
 
       {/* Featured Collections */}
-      <Container>
+      <Container className="py-2">
         <div className="section-heading">
           <p className="sub-heading">Our Designs</p>
           <h2 className="main-heading">Shop by Category</h2>
         </div>
 
         {loading ? (
-          <div className="text-center py-5">
+          <div className="text-center py-3">
             <Spinner animation="border" />
-            <p className="mt-3">Loading categories...</p>
+            <p className="mt-2">Loading categories...</p>
           </div>
         ) : error ? (
-          <Alert variant="danger" className="text-center mb-4">
+          <Alert variant="danger" className="text-center mb-3">
             <p className="mb-0">{error}</p>
           </Alert>
         ) : (
-          <Row className="g-4 mb-5">
+          <Row className="g-4 mb-4">
             {categories.slice(0, 4).map(category => (
               <CategoryDisplay key={category._id} category={category} />
             ))}
@@ -148,14 +150,14 @@ const HomePage = () => {
       <ModestEleganceCarousel />
 
       {/* New Collection - Latest Products */}
-      <Container>
-        <div className="section-heading mt-5">
+      <Container className="py-2">
+        <div className="section-heading mt-3">
           <p className="sub-heading">New Collection</p>
           <h2 className="main-heading">Latest Products</h2>
         </div>
         
         {/* Filters */}
-        <Row className="mb-5 g-3">
+        <Row className="mb-4 g-3">
           <Col md={4}>
             <Form.Group>
               <Form.Label className="text-uppercase small fw-light letter-spacing-1">Category</Form.Label>
@@ -206,14 +208,14 @@ const HomePage = () => {
         </Row>
 
         {/* Products Grid */}
-        <div className="mb-5">
+        <div className="mb-4">
           {loading ? (
-            <div className="text-center py-5">
+            <div className="text-center py-3">
               <Spinner animation="border" />
-              <p className="mt-3">Loading products...</p>
+              <p className="mt-2">Loading products...</p>
             </div>
           ) : error ? (
-            <Alert variant="danger" className="text-center mb-4">
+            <Alert variant="danger" className="text-center mb-3">
               <p className="mb-0">{error}</p>
             </Alert>
           ) : (
@@ -229,11 +231,11 @@ const HomePage = () => {
                 ))
               ) : (
                 <Col>
-                  <div className="text-center p-5" style={{ 
+                  <div className="text-center p-4" style={{ 
                     backgroundColor: 'var(--color-background)',
                     borderRadius: '8px'
                   }}>
-                    <h3 className="h4 mb-3">No products found</h3>
+                    <h3 className="h4 mb-2">No products found</h3>
                     <p className="text-muted">
                       Try adjusting your filters or search query
                     </p>
@@ -244,12 +246,12 @@ const HomePage = () => {
           )}
         </div>
 
-        {/* Newsletter Section */}
-        <section className="mb-5 py-5">
+        {/* Newsletter Section - Reduced vertical space */}
+        <section className="mb-4 py-4">
           <Row className="justify-content-center">
             <Col md={8} className="text-center">
-              <h2 className="mb-4">Join Our Newsletter</h2>
-              <p className="text-muted mb-4">Subscribe to receive updates on new collections, special offers, and exclusive events.</p>
+              <h2 className="mb-3">Join Our Newsletter</h2>
+              <p className="text-muted mb-3">Subscribe to receive updates on new collections, special offers, and exclusive events.</p>
               <Form className="d-flex gap-3 justify-content-center">
                 <Form.Control
                   type="email"

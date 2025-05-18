@@ -1,0 +1,260 @@
+/* Elegant Footer Styles */
+
+/* Main footer container */
+.elegant-footer {
+  background-color: var(--elegant-black);
+  background-image: linear-gradient(to bottom, #2c2a24, #1c1a16);
+  color: var(--elegant-white);
+  font-family: var(--font-body);
+  padding: 0;
+  min-height: 100%;
+  position: relative;
+  margin-bottom: 0;
+  margin-top: 5rem;
+}
+
+/* Footer top section with logo and diamond separator */
+.footer-top {
+  padding: 3rem 0 2rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(240, 230, 210, 0.1);
+}
+
+.footer-logo {
+  font-family: var(--font-heading);
+  color: var(--elegant-creamy);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.footer-separator {
+  position: relative;
+  height: 20px;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-separator span {
+  color: var(--elegant-creamy);
+  font-size: 1.2rem;
+  position: relative;
+  background-color: #2c2a24;
+  padding: 0 15px;
+  z-index: 1;
+}
+
+.footer-separator:before {
+  content: "";
+  height: 1px;
+  width: 150px;
+  background: linear-gradient(90deg, transparent, var(--elegant-creamy-dark), transparent);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Main footer content section */
+.footer-main {
+  padding: 4rem 0;
+}
+
+.footer-heading {
+  font-family: var(--font-heading);
+  color: var(--elegant-creamy);
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.footer-heading:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 40px;
+  background-color: var(--elegant-creamy);
+  opacity: 0.5;
+}
+
+.footer-text {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* Footer social icons */
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--elegant-creamy) !important;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: var(--elegant-creamy);
+  color: var(--elegant-black) !important;
+  transform: translateY(-3px);
+}
+
+/* Footer links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 300;
+  position: relative;
+  padding-left: 15px;
+}
+
+.footer-links a:before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--elegant-creamy);
+  font-size: 1.2rem;
+  line-height: 1;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--elegant-creamy);
+  padding-left: 18px;
+}
+
+.footer-links a:hover:before {
+  transform: translateX(3px);
+  opacity: 1;
+}
+
+/* Newsletter form */
+.footer-newsletter .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(240, 230, 210, 0.2);
+  color: var(--elegant-white);
+  padding: 0.75rem 1rem;
+  border-radius: 4px 0 0 4px;
+}
+
+.footer-newsletter .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-newsletter .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--elegant-creamy);
+  box-shadow: none;
+  color: var(--elegant-white);
+}
+
+.footer-newsletter .btn-primary {
+  background-color: var(--elegant-creamy);
+  border-color: var(--elegant-creamy);
+  color: var(--elegant-black);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+}
+
+.footer-newsletter .btn-primary:hover {
+  background-color: var(--elegant-creamy-dark);
+  border-color: var(--elegant-creamy-dark);
+  color: var(--elegant-black);
+}
+
+/* Footer contact information */
+.footer-contact {
+  margin-top: 2rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.contact-icon {
+  color: var(--elegant-creamy);
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+/* Footer bottom section */
+.footer-bottom {
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 2rem 0;
+  border-top: 1px solid rgba(240, 230, 210, 0.1);
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.payment-icon {
+  color: var(--elegant-creamy);
+  font-size: 1.5rem;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.payment-icon:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Make footer stick to bottom */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  flex: 1;
+}
+
+/* Fix the white gap issue */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+html {
+  height: 100%;
+} 

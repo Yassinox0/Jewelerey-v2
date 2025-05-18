@@ -5,14 +5,16 @@
   --elegant-gold: #d4af37;
   --elegant-gold-light: #e5cc78;
   --elegant-gold-dark: #b08b1f;
+  --elegant-creamy: #f0e6d2;
+  --elegant-creamy-dark: #e5d7b7;
   --elegant-black: #212121;
   --elegant-grey: #757575;
   --elegant-light-grey: #f5f5f5;
   --elegant-white: #ffffff;
   
   /* Override Bootstrap variables */
-  --bs-primary: var(--elegant-gold);
-  --bs-primary-rgb: 212, 175, 55;
+  --bs-primary: var(--elegant-creamy);
+  --bs-primary-rgb: 240, 230, 210;
   --bs-link-color: var(--elegant-gold);
   --bs-link-hover-color: var(--elegant-gold-dark);
 }
@@ -28,35 +30,42 @@
 
 /* Button overrides */
 .btn-primary {
-  background-color: var(--elegant-gold) !important;
-  border-color: var(--elegant-gold) !important;
+  background-color: var(--elegant-creamy) !important;
+  border-color: var(--elegant-creamy) !important;
   color: var(--elegant-black) !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: var(--elegant-gold-dark) !important;
-  border-color: var(--elegant-gold-dark) !important;
+  background-color: var(--elegant-creamy-dark) !important;
+  border-color: var(--elegant-creamy-dark) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
 }
 
 .btn-outline-primary {
-  color: var(--elegant-gold) !important;
-  border-color: var(--elegant-gold) !important;
+  color: var(--elegant-creamy-dark) !important;
+  border-color: var(--elegant-creamy-dark) !important;
+  transition: all 0.3s ease;
 }
 
 .btn-outline-primary:hover {
-  background-color: var(--elegant-gold) !important;
+  background-color: var(--elegant-creamy) !important;
+  border-color: var(--elegant-creamy) !important;
   color: var(--elegant-black) !important;
+  transform: translateY(-2px);
 }
 
 /* Form controls */
 .form-control:focus, .form-select:focus {
-  border-color: var(--elegant-gold) !important;
-  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25) !important;
+  border-color: var(--elegant-creamy) !important;
+  box-shadow: 0 0 0 0.25rem rgba(240, 230, 210, 0.25) !important;
 }
 
 /* Badge styles */
 .badge.bg-primary {
-  background-color: var(--elegant-gold) !important;
+  background-color: var(--elegant-creamy) !important;
   color: var(--elegant-black) !important;
 }
 
@@ -80,13 +89,13 @@ a:hover {
 
 /* Cards */
 .card:hover {
-  border-color: var(--elegant-gold);
+  border-color: var(--elegant-creamy);
 }
 
 /* Pagination */
 .page-item.active .page-link {
-  background-color: var(--elegant-gold) !important;
-  border-color: var(--elegant-gold) !important;
+  background-color: var(--elegant-creamy) !important;
+  border-color: var(--elegant-creamy) !important;
   color: var(--elegant-black) !important;
 }
 
@@ -122,18 +131,18 @@ a:hover {
 
 /* Replace Stripe button colors */
 .stripe-button {
-  background-color: var(--elegant-gold) !important;
-  border-color: var(--elegant-gold) !important;
+  background-color: var(--elegant-creamy) !important;
+  border-color: var(--elegant-creamy) !important;
 }
 
 .stripe-button:hover {
-  background-color: var(--elegant-gold-dark) !important;
-  border-color: var(--elegant-gold-dark) !important;
+  background-color: var(--elegant-creamy-dark) !important;
+  border-color: var(--elegant-creamy-dark) !important;
 }
 
 .stripe-input:focus {
-  border-color: var(--elegant-gold) !important;
-  box-shadow: 0 0 0 1px var(--elegant-gold) !important;
+  border-color: var(--elegant-creamy) !important;
+  box-shadow: 0 0 0 1px var(--elegant-creamy) !important;
 }
 
 .card-type-indicator {
