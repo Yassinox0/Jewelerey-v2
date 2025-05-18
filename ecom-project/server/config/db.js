@@ -10,11 +10,14 @@ const client = new MongoClient(uri, {
     strict: true,
     deprecationErrors: true,
   },
-  // Add these options to fix SSL connection issues
-  minPoolSize: 1,
-  tlsInsecure: true,  // Only use in development environment
+  // Fix SSL connection issues
   ssl: true,
-  directConnection: false,
+  tls: true,
+  tlsAllowInvalidCertificates: true, // For development only
+  tlsAllowInvalidHostnames: true, // For development only
+  maxPoolSize: 50,
+  connectTimeoutMS: 30000,
+  socketTimeoutMS: 45000,
 });
 
 let db;

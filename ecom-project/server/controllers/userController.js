@@ -105,4 +105,58 @@ exports.getProfile = async (req, res) => {
       details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
+};
+
+/**
+ * Make a user an admin
+ * @route PUT /api/users/make-admin
+ * @access Private (super admin only)
+ */
+exports.makeUserAdmin = async (req, res) => {
+  try {
+    const { email } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        error: 'Email is required'
+      });
+    }
+    
+    const db = getDB();
+    const usersCollection = db.collection('users');
+    
+    // Find the user by email
+    const user = await usersCollection.findOne({ email });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    // Update the user role to admin
+    await usersCollection.updateOne(
+      { email },
+      { 
+        $set: { 
+          role: 'admin',
+          updatedAt: new Date()
+        } 
+      }
+    );
+    
+    res.status(200).json({
+      success: true,
+      message: `User ${email} has been promoted to admin`
+    });
+  } catch (error) {
+    console.error('Make admin error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
 }; 

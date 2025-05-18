@@ -219,6 +219,100 @@ exports.getMe = async (req, res) => {
   }
 };
 
+// @desc    Check if the current user is an admin
+// @route   GET /api/auth/check-admin
+// @access  Private
+exports.checkAdmin = async (req, res) => {
+  try {
+    console.log('Checking admin status for user ID:', req.user.id);
+    
+    // Fetch the user from the database
+    const user = await User.findByPk(req.user.id);
+    
+    if (!user) {
+      console.log('User not found');
+      return res.status(404).json({
+        success: false,
+        isAdmin: false,
+        error: 'User not found'
+      });
+    }
+    
+    // Check if user is admin
+    const isAdmin = user.role === 'admin';
+    console.log('User role:', user.role);
+    console.log('Is admin:', isAdmin);
+    
+    res.status(200).json({
+      success: true,
+      isAdmin,
+      role: user.role
+    });
+  } catch (error) {
+    console.error('Check admin error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};
+
+// @desc    Check admin status directly with Firebase UID
+// @route   POST /api/auth/check-admin-direct
+// @access  Public
+exports.checkAdminDirect = async (req, res) => {
+  try {
+    const { firebaseUid } = req.body;
+    
+    if (!firebaseUid) {
+      return res.status(400).json({
+        success: false,
+        error: 'Firebase UID is required'
+      });
+    }
+    
+    console.log('Checking admin status for Firebase UID:', firebaseUid);
+    
+    // Find user by Firebase UID
+    const user = await User.findOne({ 
+      where: { firebaseUid },
+      attributes: ['id', 'name', 'email', 'role', 'firebaseUid']
+    });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        isAdmin: false,
+        error: 'User not found with this Firebase UID',
+        firebaseUid
+      });
+    }
+    
+    // Check if user is admin
+    const isAdmin = user.role === 'admin';
+    
+    res.status(200).json({
+      success: true,
+      isAdmin,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        firebaseUid: user.firebaseUid
+      }
+    });
+  } catch (error) {
+    console.error('Direct admin check error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};
+
 // @desc    Create admin user
 // @route   POST /api/auth/create-admin
 // @access  Private/Admin

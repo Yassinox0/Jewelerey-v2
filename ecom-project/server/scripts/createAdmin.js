@@ -1,59 +1,72 @@
-require('dotenv').config();
-const sequelize = require('../config/database');
-const User = require('../models/User');
-const Cart = require('../models/Cart');
-const bcrypt = require('bcrypt');
+/**
+ * Script to create or update a user as an admin in the MongoDB database
+ * Usage: node createAdmin.js <email> <name>
+ */
 
-// Admin user details
-const adminUser = {
-  name: 'Admin User',
-  email: 'admin@goyna.com',
-  password: 'admin123',
-  role: 'admin'
-};
+const { MongoClient } = require('mongodb');
+require('dotenv').config({ path: '../.env' });
 
-// Function to create admin user
-async function createAdminUser() {
+// MongoDB Connection URI
+const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/eleganceJewelsDB';
+
+async function createOrUpdateAdmin(email, name) {
+  const client = new MongoClient(uri);
+  
   try {
-    // Connect to database
-    await sequelize.authenticate();
-    console.log('Database connection established.');
-
-    // Check if admin already exists
-    const existingAdmin = await User.findOne({ where: { email: adminUser.email } });
+    // Connect to MongoDB
+    await client.connect();
+    console.log('Connected to MongoDB');
     
-    if (existingAdmin) {
-      console.log('Admin user already exists!');
-      await sequelize.close();
-      return;
+    const db = client.db();
+    const usersCollection = db.collection('users');
+    
+    // Check if user exists
+    const user = await usersCollection.findOne({ email });
+    
+    if (user) {
+      // Update existing user to admin
+      const result = await usersCollection.updateOne(
+        { email },
+        { 
+          $set: { 
+            role: 'admin',
+            name: name || user.name,
+            updatedAt: new Date()
+          } 
+        }
+      );
+      
+      if (result.modifiedCount === 1) {
+        console.log(`✅ User ${email} has been successfully made an admin!`);
+      } else if (result.matchedCount === 1 && result.modifiedCount === 0) {
+        console.log(`ℹ️ User ${email} is already an admin.`);
+      } else {
+        console.log(`⚠️ No changes were made to user ${email}.`);
+      }
+    } else {
+      // Create a new admin user
+      const newAdminUser = {
+        email,
+        name: name || 'Admin User',
+        role: 'admin',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+      
+      await usersCollection.insertOne(newAdminUser);
+      console.log(`✅ New admin user created with email: ${email}`);
     }
-
-    // Create admin user
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(adminUser.password, salt);
-
-    const newAdmin = await User.create({
-      name: adminUser.name,
-      email: adminUser.email,
-      password: hashedPassword,
-      role: adminUser.role
-    });
-
-    // Create an empty cart for the admin
-    await Cart.create({
-      userId: newAdmin.id
-    });
-
-    console.log('Admin user created successfully!');
-    console.log('Email:', adminUser.email);
-    console.log('Password:', adminUser.password);
-    console.log('Role:', adminUser.role);
-
-    await sequelize.close();
   } catch (error) {
-    console.error('Error creating admin user:', error);
+    console.error('Error creating/updating admin:', error);
+  } finally {
+    await client.close();
+    console.log('Disconnected from MongoDB');
   }
 }
 
-// Run the function
-createAdminUser(); 
+// Get arguments from command line
+const email = process.argv[2] || "admin@example.com";
+const name = process.argv[3] || "Admin User";
+
+console.log(`Creating/updating admin user with email: ${email}, name: ${name}`);
+createOrUpdateAdmin(email, name); 
