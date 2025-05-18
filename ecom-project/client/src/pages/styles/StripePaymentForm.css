@@ -1,0 +1,93 @@
+.stripe-payment-form {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.payment-logos img {
+  margin-left: 8px;
+  transition: all 0.3s ease;
+}
+
+.inactive-card {
+  opacity: 0.4;
+  filter: grayscale(80%);
+}
+
+.active-card {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.stripe-input {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.stripe-input:focus {
+  border-color: #6772e5;
+  box-shadow: 0 0 0 1px #6772e5;
+}
+
+.stripe-card {
+  transition: all 0.2s ease;
+}
+
+.stripe-card:hover {
+  border-color: #6772e5;
+}
+
+.stripe-button {
+  background-color: #6772e5 !important;
+  border-color: #6772e5 !important;
+}
+
+.stripe-button:hover {
+  background-color: #5469d4 !important;
+  border-color: #5469d4 !important;
+}
+
+.card-number-container {
+  position: relative;
+}
+
+.card-type-indicator {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  color: #6772e5;
+  font-size: 20px;
+}
+
+/* Stripe style form cards */
+.stripe-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02) !important;
+  border: 1px solid #f0f0f0 !important;
+  transition: all 0.3s ease;
+}
+
+.stripe-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Helper text */
+.stripe-security {
+  color: #8898aa;
+  font-size: 13px;
+}
+
+.payment-method-container {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+} 

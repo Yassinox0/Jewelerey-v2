@@ -1,0 +1,145 @@
+/* Elegance Jewels Custom Theme */
+
+:root {
+  /* Elegant color palette */
+  --elegant-gold: #d4af37;
+  --elegant-gold-light: #e5cc78;
+  --elegant-gold-dark: #b08b1f;
+  --elegant-black: #212121;
+  --elegant-grey: #757575;
+  --elegant-light-grey: #f5f5f5;
+  --elegant-white: #ffffff;
+  
+  /* Override Bootstrap variables */
+  --bs-primary: var(--elegant-gold);
+  --bs-primary-rgb: 212, 175, 55;
+  --bs-link-color: var(--elegant-gold);
+  --bs-link-hover-color: var(--elegant-gold-dark);
+}
+
+/* Typography */
+.elegant-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--elegant-black) !important;
+}
+
+/* Button overrides */
+.btn-primary {
+  background-color: var(--elegant-gold) !important;
+  border-color: var(--elegant-gold) !important;
+  color: var(--elegant-black) !important;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: var(--elegant-gold-dark) !important;
+  border-color: var(--elegant-gold-dark) !important;
+}
+
+.btn-outline-primary {
+  color: var(--elegant-gold) !important;
+  border-color: var(--elegant-gold) !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--elegant-gold) !important;
+  color: var(--elegant-black) !important;
+}
+
+/* Form controls */
+.form-control:focus, .form-select:focus {
+  border-color: var(--elegant-gold) !important;
+  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25) !important;
+}
+
+/* Badge styles */
+.badge.bg-primary {
+  background-color: var(--elegant-gold) !important;
+  color: var(--elegant-black) !important;
+}
+
+/* Navbar styles */
+.navbar .nav-link.active {
+  color: var(--elegant-gold) !important;
+}
+
+.navbar .nav-link:hover {
+  color: var(--elegant-gold) !important;
+}
+
+/* Links */
+a {
+  color: var(--elegant-gold);
+}
+
+a:hover {
+  color: var(--elegant-gold-dark);
+}
+
+/* Cards */
+.card:hover {
+  border-color: var(--elegant-gold);
+}
+
+/* Pagination */
+.page-item.active .page-link {
+  background-color: var(--elegant-gold) !important;
+  border-color: var(--elegant-gold) !important;
+  color: var(--elegant-black) !important;
+}
+
+.page-link {
+  color: var(--elegant-gold);
+}
+
+.page-link:hover {
+  color: var(--elegant-gold-dark);
+}
+
+/* Add more elegance */
+.section-heading {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-heading .sub-heading {
+  font-family: 'Playfair Display', serif;
+  color: var(--elegant-gold);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.section-heading .main-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Replace Stripe button colors */
+.stripe-button {
+  background-color: var(--elegant-gold) !important;
+  border-color: var(--elegant-gold) !important;
+}
+
+.stripe-button:hover {
+  background-color: var(--elegant-gold-dark) !important;
+  border-color: var(--elegant-gold-dark) !important;
+}
+
+.stripe-input:focus {
+  border-color: var(--elegant-gold) !important;
+  box-shadow: 0 0 0 1px var(--elegant-gold) !important;
+}
+
+.card-type-indicator {
+  color: var(--elegant-gold) !important;
+}
+
+.stripe-card:hover {
+  border-color: var(--elegant-gold) !important;
+} 

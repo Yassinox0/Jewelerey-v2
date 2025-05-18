@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { clearCart } from '../redux/slices/cartSlice';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import './styles/StripePaymentForm.css'; // Import the CSS file we'll create
 
 const CheckoutPage = () => {
   const { currentUser } = useAuth();
@@ -19,6 +20,7 @@ const CheckoutPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('card');
+  const [fadeIn, setFadeIn] = useState(true);
   
   const [shippingAddress, setShippingAddress] = useState({
     fullName: '',
@@ -54,18 +56,62 @@ const CheckoutPage = () => {
     }));
   };
 
-  // Handle payment details input change
-  const handlePaymentChange = (e) => {
-    const { name, value } = e.target;
-    setPaymentDetails(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  // Format credit card number with spaces
+  const formatCreditCardNumber = (value) => {
+    if (!value) return '';
+    return value.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
   };
 
-  // Handle payment method change
+  // Get credit card type based on first digits
+  const getCardType = (cardNumber) => {
+    if (!cardNumber) return '';
+    const cleanedNumber = cardNumber.replace(/\s/g, '');
+    
+    if (/^4/.test(cleanedNumber)) return 'visa';
+    if (/^5[1-5]/.test(cleanedNumber)) return 'mastercard';
+    if (/^3[47]/.test(cleanedNumber)) return 'amex';
+    if (/^6(?:011|5)/.test(cleanedNumber)) return 'discover';
+    
+    return '';
+  };
+
+  // Handle payment details input change with formatting
+  const handlePaymentChange = (e) => {
+    const { name, value } = e.target;
+    
+    if (name === 'cardNumber') {
+      // Format card number with spaces
+      const formattedValue = formatCreditCardNumber(value);
+      setPaymentDetails(prev => ({
+        ...prev,
+        [name]: formattedValue
+      }));
+    } else if (name === 'expiryDate') {
+      // Format expiry date with slash
+      const cleaned = value.replace(/\s/g, '').replace(/\//g, '');
+      let formatted = cleaned;
+      if (cleaned.length > 2) {
+        formatted = `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}`;
+      }
+      setPaymentDetails(prev => ({
+        ...prev,
+        [name]: formatted
+      }));
+    } else {
+      setPaymentDetails(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+  };
+
+  // Handle payment method change with animation
   const handlePaymentMethodChange = (e) => {
-    setPaymentMethod(e.target.value);
+    setFadeIn(false);
+    setTimeout(() => {
+      setPaymentMethod(e.target.value);
+      setFadeIn(true);
+    }, 300);
   };
 
   // Handle credit card payment
@@ -363,83 +409,119 @@ const CheckoutPage = () => {
                   </div>
                 </Form.Group>
                 
-                {paymentMethod === 'card' && (
-                  <div className="mt-4 p-3 border rounded">
-                    <h4 className="mb-3">Credit Card Information</h4>
-                    
-                    <Form.Group className="mb-3">
-                      <Form.Label>Card Number*</Form.Label>
-                      <Form.Control
-                        type="text"
-                        name="cardNumber"
-                        value={paymentDetails.cardNumber}
-                        onChange={handlePaymentChange}
-                        placeholder="1234 5678 9012 3456"
-                        maxLength={19}
-                        required
-                      />
-                    </Form.Group>
-                    
-                    <Form.Group className="mb-3">
-                      <Form.Label>Card Holder Name*</Form.Label>
-                      <Form.Control
-                        type="text"
-                        name="cardHolder"
-                        value={paymentDetails.cardHolder}
-                        onChange={handlePaymentChange}
-                        placeholder="John Doe"
-                        required
-                      />
-                    </Form.Group>
-                    
-                    <Row>
-                      <Col md={6} className="mb-3">
-                        <Form.Group>
-                          <Form.Label>Expiry Date*</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="expiryDate"
-                            value={paymentDetails.expiryDate}
-                            onChange={handlePaymentChange}
-                            placeholder="MM/YY"
-                            maxLength={5}
-                            required
+                <div className={`payment-method-container ${fadeIn ? 'fade-in' : 'fade-out'}`}>
+                  {paymentMethod === 'card' && (
+                    <div className="stripe-payment-form mt-4">
+                      <div className="stripe-header d-flex justify-content-between align-items-center mb-4">
+                        <h4 className="m-0">Payment details</h4>
+                        <div className="payment-logos d-flex">
+                          <img 
+                            src="https://cdn.iconscout.com/icon/free/png-256/visa-3-226460.png" 
+                            alt="Visa" 
+                            width="40"
+                            className={getCardType(paymentDetails.cardNumber) === 'visa' ? 'active-card' : 'inactive-card'} 
                           />
-                        </Form.Group>
-                      </Col>
+                          <img 
+                            src="https://cdn.iconscout.com/icon/free/png-256/mastercard-3-226466.png" 
+                            alt="MasterCard" 
+                            width="40" 
+                            className={getCardType(paymentDetails.cardNumber) === 'mastercard' ? 'active-card' : 'inactive-card'}
+                          />
+                          <img 
+                            src="https://cdn.iconscout.com/icon/free/png-256/amex-82209.png" 
+                            alt="Amex" 
+                            width="40"
+                            className={getCardType(paymentDetails.cardNumber) === 'amex' ? 'active-card' : 'inactive-card'} 
+                          />
+                        </div>
+                      </div>
                       
-                      <Col md={6} className="mb-3">
+                      <div className="stripe-card p-4 mb-4 bg-white border rounded shadow-sm">
+                        <Form.Group className="mb-3">
+                          <Form.Label className="text-muted small">Card information</Form.Label>
+                          <div className="card-number-container position-relative">
+                            <Form.Control
+                              type="text"
+                              name="cardNumber"
+                              value={paymentDetails.cardNumber}
+                              onChange={handlePaymentChange}
+                              placeholder="1234 5678 9012 3456"
+                              maxLength={19}
+                              className="stripe-input p-3 mb-2"
+                              required
+                            />
+                            {getCardType(paymentDetails.cardNumber) && (
+                              <div className="card-type-indicator">
+                                <i className={`bi bi-${getCardType(paymentDetails.cardNumber) === 'visa' ? 'credit-card' : 'credit-card-2-front'}`}></i>
+                              </div>
+                            )}
+                          </div>
+                          <div className="d-flex">
+                            <Form.Control
+                              type="text"
+                              name="expiryDate"
+                              value={paymentDetails.expiryDate}
+                              onChange={handlePaymentChange}
+                              placeholder="MM / YY"
+                              maxLength={5}
+                              className="stripe-input p-3 me-2"
+                              required
+                            />
+                            <Form.Control
+                              type="text"
+                              name="cvv"
+                              value={paymentDetails.cvv}
+                              onChange={handlePaymentChange}
+                              placeholder="CVC"
+                              maxLength={4}
+                              className="stripe-input p-3"
+                              required
+                            />
+                          </div>
+                        </Form.Group>
+                      </div>
+                      
+                      <div className="stripe-card p-4 mb-4 bg-white border rounded shadow-sm">
                         <Form.Group>
-                          <Form.Label>CVV*</Form.Label>
+                          <Form.Label className="text-muted small">Cardholder name</Form.Label>
                           <Form.Control
                             type="text"
-                            name="cvv"
-                            value={paymentDetails.cvv}
+                            name="cardHolder"
+                            value={paymentDetails.cardHolder}
                             onChange={handlePaymentChange}
-                            placeholder="123"
-                            maxLength={4}
+                            placeholder="Full name on card"
+                            className="stripe-input p-3"
                             required
                           />
                         </Form.Group>
-                      </Col>
-                    </Row>
-                    
-                    <div className="mt-2 d-flex gap-3">
-                      <i className="bi bi-credit-card-2-front fs-4"></i>
-                      <i className="bi bi-credit-card fs-4"></i>
-                      <i className="bi bi-credit-card-fill fs-4"></i>
+                      </div>
+                      
+                      <div className="stripe-card p-4 bg-white border rounded shadow-sm">
+                        <Form.Group>
+                          <Form.Label className="text-muted small">Billing address</Form.Label>
+                          <Form.Select className="stripe-input p-3">
+                            <option>Same as shipping address</option>
+                            <option>Use different address</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </div>
+                      
+                      <div className="mt-4 stripe-security d-flex align-items-center">
+                        <i className="bi bi-lock-fill me-2 text-success"></i>
+                        <small className="text-muted">Your payment details are secured with SSL encryption</small>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
                 
                 <Button 
                   variant="primary" 
                   type="submit" 
                   size="lg" 
-                  className="w-100 mt-4"
+                  className={`w-100 mt-4 py-3 ${paymentMethod === 'card' ? 'stripe-button' : ''}`}
                   disabled={loading}
                 >
-                  {loading ? 'Processing...' : paymentMethod === 'card' ? 'Pay Now' : 'Place Order'}
+                  {loading ? 'Processing...' : paymentMethod === 'card' ? 'Pay $' + (total || 0).toFixed(2) : 'Place Order'}
                 </Button>
               </Form>
             </Card.Body>

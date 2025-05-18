@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Spinner, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Form, Spinner, Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ProductCardStyled from '../components/ProductCardStyled';
 import CategoryDisplay from '../components/CategoryDisplay';
 import { getAllProducts, getAllCategories } from '../services/productService';
+import ModestEleganceCarousel from '../components/ModestEleganceCarousel';
+import '../styles/HomePage.css';
+import '../styles/ModestEleganceCarousel.css';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -94,28 +97,27 @@ const HomePage = () => {
   }, [products, selectedCategory, searchQuery, sortBy]);
 
   return (
-    <Container fluid className="px-0">
-      {/* Hero Section */}
-      <section className="hero-section mb-5">
-        <video className="hero-video" autoPlay muted loop>
-          <source src="/static/ring-video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <Container>
-          <Row>
-            <Col md={6} className="hero-content">
-              <h1>Goyna</h1>
-              <p className="typewriter">Discover A World Of Beautiful Hand Crafted Designs</p>
-              <Link to="/products" className="btn hero-button">FIND YOURS</Link>
-            </Col>
-            <Col md={6} className="d-flex justify-content-center align-items-center">
-              <img src="/static/ring-sec1.png" alt="Featured Ring" 
-                className="animate__animated animate__zoomIn animate__infinite animate__slower" 
-                style={{ maxWidth: '80%' }} />
-            </Col>
-          </Row>
-        </Container>
-      </section>
+    <div className="home-page">
+      <Container className="px-lg-3 px-sm-2">
+        {/* Hero Section with Video Background - Compact with rounded corners */}
+        <section className="fullscreen-video-hero">
+          <video autoPlay muted loop className="fullscreen-video">
+            <source src="/videos/vid1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="hero-content-wrapper">
+            <div className="hero-text">
+              <h1 className="elegant-title">Elegance Jewels</h1>
+              <p className="elegant-subtitle">
+                Discover our exquisite collection of handcrafted jewelry, designed to make every moment unforgettable
+              </p>
+              <Button variant="outline-light" size="lg" className="hero-button mt-4">
+                Explore Collection
+              </Button>
+            </div>
+          </div>
+        </section>
+      </Container>
 
       {/* Featured Collections */}
       <Container>
@@ -140,8 +142,13 @@ const HomePage = () => {
             ))}
           </Row>
         )}
+      </Container>
+      
+      {/* UB Jewellers Style Carousel */}
+      <ModestEleganceCarousel />
 
-        {/* New Collection - Latest Products */}
+      {/* New Collection - Latest Products */}
+      <Container>
         <div className="section-heading mt-5">
           <p className="sub-heading">New Collection</p>
           <h2 className="main-heading">Latest Products</h2>
@@ -258,7 +265,7 @@ const HomePage = () => {
           </Row>
         </section>
       </Container>
-    </Container>
+    </div>
   );
 };
 

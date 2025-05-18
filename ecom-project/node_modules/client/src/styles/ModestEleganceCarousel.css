@@ -1,0 +1,145 @@
+/* UB Jewellers Style Carousel */
+.ub-elegance-carousel {
+  margin: 5rem 0;
+  overflow: hidden;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section-title h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.title-separator {
+  height: 3px;
+  width: 60px;
+  background-color: #d4af37;
+  margin: 0.8rem auto;
+}
+
+.carousel-wrapper {
+  padding: 10px;
+}
+
+.ub-carousel {
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.rounded-carousel-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+  cursor: default;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.rounded-carousel-card:hover .carousel-image {
+  transform: scale(1.05);
+}
+
+/* Custom indicators styling */
+.ub-carousel .carousel-indicators {
+  bottom: 10px;
+}
+
+.ub-carousel .carousel-indicators [data-bs-target] {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  opacity: 1;
+  margin: 0 5px;
+}
+
+.ub-carousel .carousel-indicators .active {
+  background-color: #d4af37;
+  transform: scale(1.2);
+}
+
+/* Control arrows styling */
+.ub-carousel .carousel-control-prev,
+.ub-carousel .carousel-control-next {
+  width: 8%;
+  opacity: 0.8;
+}
+
+.ub-carousel .carousel-control-prev-icon,
+.ub-carousel .carousel-control-next-icon {
+  width: 45px;
+  height: 45px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ub-carousel .carousel-control-prev {
+  left: 10px;
+}
+
+.ub-carousel .carousel-control-next {
+  right: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .rounded-carousel-card {
+    height: 400px;
+  }
+
+  .ub-carousel .carousel-control-prev-icon,
+  .ub-carousel .carousel-control-next-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ub-elegance-carousel {
+    margin: 3rem 0;
+  }
+
+  .section-title h2 {
+    font-size: 2.2rem;
+  }
+
+  .rounded-carousel-card {
+    height: 300px;
+    border-radius: 16px;
+  }
+  
+  .ub-carousel .carousel-control-prev,
+  .ub-carousel .carousel-control-next {
+    width: 10%;
+  }
+  
+  .ub-carousel .carousel-control-prev-icon,
+  .ub-carousel .carousel-control-next-icon {
+    width: 30px;
+    height: 30px;
+  }
+} 

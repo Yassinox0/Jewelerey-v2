@@ -50,7 +50,7 @@ const OrdersPage = () => {
     
     // Add company logo or name
     doc.setFontSize(20);
-    doc.text('Goyna Jewelry', 105, 20, { align: 'center' });
+    doc.text('Elegance Jewels', 105, 20, { align: 'center' });
     
     // Add receipt title
     doc.setFontSize(16);
@@ -109,11 +109,11 @@ const OrdersPage = () => {
     
     // Add footer
     doc.setFontSize(10);
-    doc.text('Thank you for shopping with Goyna Jewelry!', 105, finalY + 30, { align: 'center' });
-    doc.text('For any questions, please contact customer service at support@goyna.com', 105, finalY + 35, { align: 'center' });
+    doc.text('Thank you for shopping with Elegance Jewels!', 105, finalY + 30, { align: 'center' });
+    doc.text('For any questions, please contact customer service at support@elegancejewels.com', 105, finalY + 35, { align: 'center' });
     
     // Save the PDF
-    doc.save(`Goyna-Receipt-${order._id}.pdf`);
+    doc.save(`EleganceJewels-Receipt-${order._id}.pdf`);
   };
   
   // Helper function to get status badge
